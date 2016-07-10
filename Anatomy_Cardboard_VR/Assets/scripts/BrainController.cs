@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class BrainController : MonoBehaviour {
 
-
 	// Use this for initialization
 	void Start () {
 		foreach(Transform child in transform)
