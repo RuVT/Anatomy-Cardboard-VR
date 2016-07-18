@@ -4,8 +4,17 @@ using UnityEngine.EventSystems;
 
 public class BrainController : MonoBehaviour {
 
+	public static BrainController instance;
+	public bool trackOrientation = true;
+	public Vector3 addRotation { get; set;}
+	public float rotationRate;
 	// Use this for initialization
 	void Start () {
+		if (instance == null) {
+			instance = this;
+		} else {
+			BrainController.Destroy (this);
+		}
 		foreach(Transform child in transform)
 		{
 			child.gameObject.AddComponent (typeof(MeshCollider));
@@ -22,11 +31,15 @@ public class BrainController : MonoBehaviour {
 			onPointerExit.callback.AddListener( ( data ) => { color.SetGazedAt(false); });
 			trigger.triggers.Add(onPointerExit);
 		}
+		rotationRate = 1.0f;
+	}
+
+	void SetRotationPanel(){
+			
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		var rot = GvrViewer.Instance.HeadPose.Orientation;
-		this.transform.localRotation = rot;
+		transform.Rotate (addRotation,Space.World);
 	}
 }
