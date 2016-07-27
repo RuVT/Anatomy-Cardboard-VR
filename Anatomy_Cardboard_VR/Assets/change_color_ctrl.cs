@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class change_color_ctrl : MonoBehaviour {
+public class change_color_ctrl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
 	private Color OROGINAL;
 	// Use this for initialization
@@ -16,5 +17,13 @@ public class change_color_ctrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void OnPointerDown(PointerEventData eventData){
+		GetComponent<Renderer> ().material.color = Color.green;
+	}
+
+	public void OnPointerUp(PointerEventData eventData){
+		GetComponent<Renderer> ().material.color = OROGINAL;
 	}
 }

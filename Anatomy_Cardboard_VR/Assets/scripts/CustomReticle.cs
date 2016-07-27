@@ -1,32 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class CustomReticle : GvrReticle {
-	GvrHead head; 
-	Quaternion cameraRotation, modelRotation;
-	Vector3 cameraPosition;
+	LayerMask saveLayer;
 	public override void OnGazeTriggerStart(Camera camera) {
-//		if(head == null)
-//			head = camera.GetComponentInParent<GvrHead> ();
-//		modelRotation = BrainController.instance.transform.rotation;
-//		cameraRotation = head.transform.rotation;
-//		cameraPosition = head.transform.position;
-//		GvrViewer.Instance.Recenter ();
-//		head.trackPosition = true;
-//		head.trackRotation = true;
-//		BrainController.instance.trackOrientation = false;
-//		Debug.Log ("OnGazeTriggerStart");
+		PhysicsRaycaster ray = GvrViewer.Controller.cam.gameObject.GetComponent<PhysicsRaycaster> ();
+		saveLayer = ray.eventMask;
+//		string name = LayerMask.LayerToName (5);
+//		ray.eventMask = new LayerMask{ value = 5 };
+		RadioMenu.Instance.MoveToCameraCenter ();
+		RadioMenu.Instance.SetActive(true);
 	}
 		
 	public override void OnGazeTriggerEnd(Camera camera) {
-//		Debug.Log ("OnGazeTriggerEnd");
-//		head.trackPosition = false;
-//		head.trackRotation = false;
-//		BrainController.instance.transform.rotation = modelRotation;
-//		head.transform.rotation = cameraRotation;
-//		head.transform.position = cameraPosition;
-//		GvrViewer.Instance.Recenter ();
-//		BrainController.instance.trackOrientation = true;
-
+		//GvrViewer.Controller.cam.gameObject.GetComponent<PhysicsRaycaster> ().eventMask.value = 2;
+		RadioMenu.Instance.SetActive (false);
+		//GvrViewer.Controller.cam.gameObject.GetComponent<PhysicsRaycaster> ().eventMask = saveLayer;
 	}
 }

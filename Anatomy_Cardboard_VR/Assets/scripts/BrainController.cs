@@ -18,18 +18,7 @@ public class BrainController : MonoBehaviour {
 		foreach(Transform child in transform)
 		{
 			child.gameObject.AddComponent (typeof(MeshCollider));
-			change_color_ctrl color = child.gameObject.AddComponent (typeof(change_color_ctrl)) as change_color_ctrl;
-			EventTrigger trigger = child.gameObject.AddComponent (typeof(EventTrigger)) as EventTrigger;
-
-			EventTrigger.Entry onPointerEnter = new EventTrigger.Entry( );
-			onPointerEnter.eventID = EventTriggerType.PointerEnter;
-			onPointerEnter.callback.AddListener( ( data ) => { color.SetGazedAt(true); });
-			trigger.triggers.Add(onPointerEnter);
-
-			EventTrigger.Entry onPointerExit = new EventTrigger.Entry( );
-			onPointerExit.eventID = EventTriggerType.PointerExit;
-			onPointerExit.callback.AddListener( ( data ) => { color.SetGazedAt(false); });
-			trigger.triggers.Add(onPointerExit);
+			child.gameObject.AddComponent (typeof(change_color_ctrl));
 		}
 		rotationRate = 1.0f;
 	}
